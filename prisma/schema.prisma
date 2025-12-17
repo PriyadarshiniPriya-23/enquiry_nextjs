@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Subject {
+  id       Int       @id @default(autoincrement())
+  name     String
+  packages Package[]
+}
+
+model Package {
+  id        Int     @id @default(autoincrement())
+  name      String
+  code      String
+  subjectId Int
+  subject   Subject @relation(fields: [subjectId], references: [id])
+}
+
+model User{
+  
+}
