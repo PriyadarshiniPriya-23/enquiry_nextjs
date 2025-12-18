@@ -1,6 +1,5 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -21,6 +20,16 @@ model Package {
   subject   Subject @relation(fields: [subjectId], references: [id])
 }
 
-model User{
-  
+enum Role {
+  ADMIN
+  HR
+  COUNSELLOR
+  ACCOUNTS
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  password String
+  role     Role   @default(ADMIN)
 }
